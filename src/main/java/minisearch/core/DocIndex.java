@@ -1,4 +1,4 @@
-package search.index;
+package minisearch.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -28,7 +28,7 @@ public class DocIndex {
         return this.descriptionIndex.size();
     }
 
-    public Integer getDocumentsNumber()  {
+    public Integer getDocumentsAmount()  {
         return this.docNumber;
     }
 
@@ -69,6 +69,13 @@ public class DocIndex {
         for (String token: description_tokens) {
             this.addToken(token, "description");
         }
+    }
+
+    public void printStats() {
+        System.out.println("----------------------");
+        System.out.println("Number of documents: " + this.getDocumentsAmount());
+        System.out.println("Number of title tokens:" + this.genTitleTokensNumber());
+        System.out.println("Number of description tokens: " + this.getDescriptionTokensNumber());
     }
 
 }

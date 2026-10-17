@@ -1,4 +1,4 @@
-package search.index;
+package minisearch.indexer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +8,9 @@ import java.util.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import minisearch.core.DocIndex;
 
-import search.index.DocIndex;
+// import minisearch.core.DocIndex;
 
 public class SearchApp {
 
@@ -21,10 +22,11 @@ public class SearchApp {
         String pthStr = "/Users/fm/Projects/search-engine/src/main/resources/ag_news.jsonl";
         List<String> dataLines = new ArrayList<>();
         Path pth = Path.of(pthStr);
-        List<JsonNode> Documents = new ArrayList<>();
+        List<JsonNode> documents = new ArrayList<>();
 
         try {
             dataLines = Files.readAllLines(pth);
+            System.out.println("Read documents: " + dataLines.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,16 +34,17 @@ public class SearchApp {
         for (String jsonString : dataLines) {
             try {
                 JsonNode rootNode = mapper.readTree(jsonString);
-                Documents.add(rootNode);
+                documents.add(rootNode);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        for (JsonNode document: Documents) {
+        for (JsonNode document: documents) {
             docIndex.addDocument(document);
         }
 
-        System.out.println(docIndex.getDocumentsNumber());
+        docIndex.printStats();
+
     }
 }

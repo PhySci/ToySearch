@@ -9,7 +9,9 @@ repositories {
 
 dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
 }
+
 
 java {
     toolchain {
@@ -18,7 +20,7 @@ java {
 }
 
 application {
-    mainClass.set("fm.search.index.Index")
+    mainClass.set("minisearch.web.App")
 }
 
 tasks.withType<JavaExec>().configureEach {
@@ -27,4 +29,8 @@ tasks.withType<JavaExec>().configureEach {
                 languageVersion.set(JavaLanguageVersion.of(17))
             }
     )
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

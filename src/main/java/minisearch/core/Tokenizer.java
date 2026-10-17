@@ -1,4 +1,4 @@
-package search.index;
+package minisearch.core;
 
 import java.util.Arrays;
 import java.util.List;
