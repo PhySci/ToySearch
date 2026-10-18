@@ -8,9 +8,8 @@ import java.util.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import minisearch.core.DocIndex;
 
-// import minisearch.core.DocIndex;
+// import minisearch.indexer.DocIndex;
 
 public class SearchApp {
 
@@ -45,6 +44,8 @@ public class SearchApp {
         }
 
         docIndex.printStats();
+
+        docIndex.findTerm("son");
 
     }
 }

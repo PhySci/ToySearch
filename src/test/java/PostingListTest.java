@@ -20,14 +20,14 @@ public class PostingListTest {
 
     @Test
     void create2Test() {
-        PostingList postingList = new PostingList(0);
+        PostingList postingList = new PostingList("sdfsdf");
         assertEquals(postingList.getTokenFrequency(), 1);
     }
 
     @Test
     void create3Test() {
-        PostingList postingList = new PostingList(0);
-        postingList.addDocument(1);
+        PostingList postingList = new PostingList("sdfsdf");
+        postingList.addDocument("sd");
         assertEquals(postingList.getTokenFrequency(), 2);
     }
 

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class PostingList {
 
     private Integer tokenFrequency;
-    private List<Integer> docIds;
+    private List<String> docIds;
 
-    public PostingList(Integer docId) {
+    public PostingList(String docId) {
         this();
         this.addDocument(docId);
     }
@@ -23,7 +23,7 @@ public class PostingList {
         this.docIds = new ArrayList<>();
     }
 
-    public boolean addDocument(Integer docId) {
+    public boolean addDocument(String docId) {
         this.docIds.add(docId);
         this.tokenFrequency += 1;
         return true;
@@ -31,6 +31,10 @@ public class PostingList {
 
     public Integer getTokenFrequency() {
         return this.tokenFrequency;
+    }
+
+    public List<String> getDocumentIds() {
+        return this.docIds;
     }
 
 }

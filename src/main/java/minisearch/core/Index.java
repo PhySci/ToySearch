@@ -20,16 +20,13 @@ public class Index {
         this.nDocuments = 0;
     }
 
-
-    public boolean addDocument(List<String> terms) {
-        Integer documentId = this.nDocuments + 1;
-
+    public boolean addDocument(String docId, List<String> terms) {
         for (String term: terms) {
             if (! this.postingMap.containsKey(term)) {
-                this.postingMap.put(term, new PostingList(documentId));
+                this.postingMap.put(term, new PostingList(docId));
             } else {
                 PostingList pl = this.postingMap.get(term);
-                pl.addDocument(documentId);
+                pl.addDocument(docId);
             }
         }
         return true;
@@ -39,5 +36,21 @@ public class Index {
         return new ArrayList<>();
     }
 
+    public Integer getNDocuments() {
+        return this.nDocuments;
+    }
+
+    public Integer getNTerms() {
+        return this.postingMap.size();
+    }
+
+    public List<String> findTerm(String term) {
+        PostingList pl = this.postingMap.get(term);
+        if (pl == null) {
+            return new ArrayList<>();
+        } else {
+            return pl.getDocumentIds();
+        }
+    }
 
 }
