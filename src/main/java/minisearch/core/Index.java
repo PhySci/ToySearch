@@ -21,12 +21,18 @@ public class Index {
     }
 
     public boolean addDocument(String docId, List<String> terms) {
+
+        Map<String, Integer> tokenCounter =  new HashMap<>();
         for (String term: terms) {
-            if (! this.postingMap.containsKey(term)) {
-                this.postingMap.put(term, new PostingList(docId));
+            tokenCounter.merge(term, 1, Integer::sum);
+        }
+
+        for (Map.Entry<String, Integer> entry: tokenCounter.entrySet()) {
+            if (! this.postingMap.containsKey(entry.getKey())) {
+                this.postingMap.put(entry.getKey(), new PostingList(docId, entry.getValue()));
             } else {
-                PostingList pl = this.postingMap.get(term);
-                pl.addDocument(docId);
+                PostingList pl = this.postingMap.get(entry.getKey());
+                pl.addDocument(docId, entry.getValue());
             }
         }
         return true;

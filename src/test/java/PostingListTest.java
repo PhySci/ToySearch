@@ -15,20 +15,20 @@ public class PostingListTest {
     @Test
     void createTest() {
         PostingList postingList = new PostingList();
-        assertEquals(postingList.getTokenFrequency(), 0);
+        assertEquals(postingList.getDocumentFrequency(), 0);
     }
 
     @Test
     void create2Test() {
-        PostingList postingList = new PostingList("sdfsdf");
-        assertEquals(postingList.getTokenFrequency(), 1);
+        PostingList postingList = new PostingList("sdfsdf", 1);
+        assertEquals(postingList.getDocumentFrequency(), 1);
     }
 
     @Test
     void create3Test() {
-        PostingList postingList = new PostingList("sdfsdf");
-        postingList.addDocument("sd");
-        assertEquals(postingList.getTokenFrequency(), 2);
+        PostingList postingList = new PostingList("sdfsdf", 1);
+        postingList.addDocument("sd", 1);
+        assertEquals(postingList.getDocumentFrequency(), 2);
     }
 
 }

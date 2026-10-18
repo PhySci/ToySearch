@@ -10,31 +10,31 @@ import java.util.ArrayList;
 
 public class PostingList {
 
-    private Integer tokenFrequency;
-    private List<String> docIds;
+    private Integer documentFrequency;
+    private List<Posting> postings;
 
-    public PostingList(String docId) {
+    public PostingList(String docId, Integer termFrequency) {
         this();
-        this.addDocument(docId);
+        this.addDocument(docId, termFrequency);
     }
 
     public PostingList() {
-        this.tokenFrequency = 0;
-        this.docIds = new ArrayList<>();
+        this.documentFrequency = 0;
+        this.postings = new ArrayList<>();
     }
 
-    public boolean addDocument(String docId) {
-        this.docIds.add(docId);
-        this.tokenFrequency += 1;
+    public boolean addDocument(String documentId, Integer termFrequency) {
+        this.postings.add(new Posting(documentId=documentId, termFrequency=termFrequency));
+        this.documentFrequency += 1;
         return true;
     }
 
-    public Integer getTokenFrequency() {
-        return this.tokenFrequency;
+    public Integer getDocumentFrequency() {
+        return this.documentFrequency;
     }
 
     public List<String> getDocumentIds() {
-        return this.docIds;
+        return this.;
     }
 
 }
