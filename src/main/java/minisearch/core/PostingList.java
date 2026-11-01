@@ -34,7 +34,7 @@ public class PostingList {
     }
 
     public List<String> getDocumentIds() {
-        return this.;
+        return  this.postings.stream().map(Posting::documentId).toList();
     }
 
 }

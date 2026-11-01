@@ -42,7 +42,7 @@ public class DocIndex {
         String docId = UUID.randomUUID().toString();
         String title = document.get("title").asText();
         String description = document.get("description").asText();
-        this.docStorage.put(docId, new Document(title=title, description=description));
+        this.docStorage.put(docId, new Document(docId = docId, title=title, description=description));
 
         List<String> title_tokens = tokenizer.apply(title);
         this.titleIndex.addDocument(docId, title_tokens);
@@ -67,6 +67,7 @@ public class DocIndex {
 
         for (String docId: docIds) {
             document = this.docStorage.get(docId);
+            System.out.println(document.getId());
             System.out.println(document.getTitle());
             System.out.println(document.getDescription());
             System.out.println("--------------------");
