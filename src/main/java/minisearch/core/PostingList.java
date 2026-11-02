@@ -20,7 +20,7 @@ public class PostingList {
 
     public PostingList() {
         this.documentFrequency = 0;
-        this.postings = new ArrayList<>();
+        this.postings = new ArrayList<Posting>();
     }
 
     public boolean addDocument(String documentId, Integer termFrequency) {
@@ -35,6 +35,10 @@ public class PostingList {
 
     public List<String> getDocumentIds() {
         return  this.postings.stream().map(Posting::documentId).toList();
+    }
+
+    public List<Posting> getPostings() {
+        return this.postings;
     }
 
 }

@@ -14,9 +14,11 @@ public class Index {
 
     private Map<String, PostingList> postingMap;
     private Integer nDocuments;
+    private Float k1 = 1.2f;
+    private Float b = 0.75f;
 
     public Index() {
-        this.postingMap = new HashMap<>();
+        this.postingMap = new HashMap<String, PostingList>();
         this.nDocuments = 0;
     }
 
@@ -57,6 +59,41 @@ public class Index {
         } else {
             return pl.getDocumentIds();
         }
+    }
+
+    public List<String> findTerms(List<String> terms) {
+        /*
+        Calculate BM25 of the query
+         */
+        Map<String, Float> findings = new HashMap<String, Float>();
+        for (String term : terms) {
+            // берём очередной терм в запросе
+
+            PostingList pl = this.postingMap.get(term);
+            if (pl == null) {
+                // надо продумать что тут должно быть
+                continue;
+            }
+
+            // inverse document frequency
+            Float idf = (float) ((this.nDocuments - pl.getDocumentFrequency() + 0.5)/(pl.getDocumentFrequency()+0.5) + 1);
+
+            for (Posting posting: pl.getPostings()) {
+                // term frequency
+                Float tf = (float) ((posting.termFrequency()*(1+this.k1))/(posting.termFrequency()+this.k1*(1-this.b+this.b*1)));
+
+                if (!findings.containsKey(posting.documentId())) {
+                    findings.put(posting.documentId(), tf*idf);
+                } else {
+                    findings.computeIfPresent(posting.documentId(),
+                            (k, v) -> v + tf*idf
+                    );
+                }
+            }
+
+
+        }
+
     }
 
 }
